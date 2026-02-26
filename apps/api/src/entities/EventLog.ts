@@ -9,7 +9,7 @@ export class EventLog {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ type: 'varchar' })
   level: LogLevel
 
   @Column()

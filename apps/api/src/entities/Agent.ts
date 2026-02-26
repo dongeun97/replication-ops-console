@@ -10,7 +10,7 @@ export class Agent {
   @Column({ unique: true })
   name: string
 
-  @Column({ default: AgentStatus.OFFLINE })
+  @Column({ type: 'varchar', default: AgentStatus.OFFLINE })
   status: AgentStatus
 
   @Column({ nullable: true })

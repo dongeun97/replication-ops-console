@@ -8,45 +8,44 @@ export class ReplicationJob {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ type: 'varchar' })
   name: string
 
-  @Column()
+  @Column({ type: 'varchar' })
   mode: ReplicationMode
 
-  @Column()
+  @Column({ type: 'varchar' })
   sourcePath: string
 
-  @Column()
+  @Column({ type: 'varchar' })
   targetPath: string
 
-  @Column({ default: JobStatus.READY })
+  @Column({ type: 'varchar', default: JobStatus.READY })
   status: JobStatus
 
-  @Column({ default: 0 })
+  @Column({ type: 'int', default: 0 })
   progress: number
 
   // FILE 복제 전용
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   totalFiles: number | null
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   transferredFiles: number | null
 
   // BLOCK 복제 전용
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   totalBytes: number | null
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   transferredBytes: number | null
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   rpoSeconds: number | null
 
   @Column({ type: 'datetime', nullable: true })
   lastSyncedAt: Date | null
 
-  // Agent와 관계 (여러 Job이 하나의 Agent에 속함)
   @ManyToOne(() => Agent, { nullable: true })
   @JoinColumn({ name: 'agent_id' })
   agent: Agent | null

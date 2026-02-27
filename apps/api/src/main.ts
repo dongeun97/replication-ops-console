@@ -1,15 +1,5 @@
-import 'reflect-metadata'
-import express from 'express'
-import cors from 'cors'
 import { AppDataSource } from './config/database'
-
-const app = express()
-app.use(cors())
-app.use(express.json())
-
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'replication-manager-api' })
-})
+import app from './app' // app.ts에서 라우터가 연결된 app을 가져옴
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000
 

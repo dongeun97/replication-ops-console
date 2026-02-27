@@ -1,0 +1,139 @@
+<mxfile host="65bd71144e">
+    <diagram id="PMerPcDhhLm_bgkFkRx1" name="페이지-1">
+        <mxGraphModel dx="1405" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Replication Ops Console - API 설계서" style="text;html=1;fontStyle=1;fontSize=16;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="20" width="500" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Agent API" style="swimlane;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="70" width="820" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="10">
+                    <mxGeometry x="20" y="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="/api/v1/agents" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="90" y="40" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="전체 Agent 목록 조회" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="400" y="40" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="10">
+                    <mxGeometry x="20" y="80" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="/api/v1/agents/:id" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="90" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="특정 Agent 조회" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="400" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="POST" style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="10">
+                    <mxGeometry x="20" y="120" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="/api/v1/agents" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="90" y="120" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Agent 등록" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="400" y="120" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="PATCH" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="10">
+                    <mxGeometry x="20" y="160" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="/api/v1/agents/:id" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="90" y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="Agent 수정" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="400" y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="DELETE" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="10">
+                    <mxGeometry x="20" y="200" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="/api/v1/agents/:id" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="90" y="200" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Agent 삭제" style="text;html=1;" vertex="1" parent="10">
+                    <mxGeometry x="400" y="200" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="Job API" style="swimlane;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="326" width="820" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="/api/v1/jobs" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="40" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="전체 Job 목록 조회" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="40" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="80" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="/api/v1/jobs/:id" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="특정 Job 조회" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="POST" style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="120" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="/api/v1/jobs" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="120" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="Job 생성" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="120" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="PATCH" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="160" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="/api/v1/jobs/:id" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="Job 수정" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="DELETE" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="200" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="/api/v1/jobs/:id" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="200" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="Job 삭제" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="200" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="POST" style="rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="30">
+                    <mxGeometry x="20" y="240" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="/api/v1/jobs/:id/start  |  /api/v1/jobs/:id/pause" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="90" y="240" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="Job 시작 / 일시정지" style="text;html=1;" vertex="1" parent="30">
+                    <mxGeometry x="400" y="240" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="Log API" style="swimlane;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="620" width="820" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="50">
+                    <mxGeometry x="20" y="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="/api/v1/logs" style="text;html=1;" vertex="1" parent="50">
+                    <mxGeometry x="90" y="40" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="전체 로그 조회 (?limit=100)" style="text;html=1;" vertex="1" parent="50">
+                    <mxGeometry x="400" y="40" width="250" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="GET" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="50">
+                    <mxGeometry x="20" y="80" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="/api/v1/logs/:id" style="text;html=1;" vertex="1" parent="50">
+                    <mxGeometry x="90" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="특정 로그 조회" style="text;html=1;" vertex="1" parent="50">
+                    <mxGeometry x="400" y="80" width="200" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

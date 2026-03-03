@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import Dashboard from '@/pages/Dashboard'
+import Agents from '@/pages/Agents'
+import Jobs from '@/pages/Jobs'
+import Logs from '@/pages/Logs'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-100">
+        <nav className="bg-white shadow px-8 py-4 flex items-center gap-8">
+          <span className="font-bold text-xl text-blue-900">Replication Ops Console</span>
+          <NavLink to="/" end className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-500 hover:text-blue-600"}>
+            Dashboard
+          </NavLink>
+          <NavLink to="/agents" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-500 hover:text-blue-600"}>
+            Agents
+          </NavLink>
+          <NavLink to="/jobs" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-500 hover:text-blue-600"}>
+            Jobs
+          </NavLink>
+          <NavLink to="/logs" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-500 hover:text-blue-600"}>
+            Logs
+          </NavLink>
+        </nav>
+        <main className="p-8">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/agents" element={<Agents />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/logs" element={<Logs />} />
+          </Routes>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </BrowserRouter>
   )
 }
 

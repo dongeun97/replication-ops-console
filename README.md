@@ -1,50 +1,105 @@
 # Replication Ops Console
 
-파일 및 블록 복제 작업을 관리하고 모니터링하는 웹 기반 복제 운영 콘솔
+파일/블록 복제 솔루션의 통합 관리 콘솔입니다.
+맨텍솔루션 MCCS(Mantech Continuous Cluster Server) 도메인을 기반으로 설계했습니다.
 
-## 목표
-- Replication Job 관리 (생성/조회/수정/중지)
-- Agent 상태 모니터링 (heartbeat)
-- 이벤트 로그 및 알람 처리
+## 화면 미리보기
 
-api: 백엔드 (Node.js + TypeScript)
-web: 프론트 (React)
+> 스크린샷 추가 예정
 
+## 기술 스택
 
-## 흐름
-[복제 엔진 (OS 레벨)]
-        ↑
-   Agent 프로그램
-        ↑
-Node.js 서버 (관리 API)
-        ↑
-React 웹 콘솔
+**Backend**
+- Node.js + TypeScript
+- Express
+- TypeORM + SQLite
 
+**Frontend**
+- React + TypeScript
+- Tailwind CSS + shadcn/ui
+- Axios
 
-# 1. Manager Api 
+**Test**
+- Playwright (E2E)
 
-Agent : 에이전트 등록/상태(online/offline), lastSeen
+## 프로젝트 구조
+```
+replication-ops-console/
+├── apps/
+│   ├── api/         # 백엔드 API 서버
+│   └── web/         # React 프론트엔드
+└── docs/            # 설계 문서
+    ├── usecase.drawio
+    ├── ui.drawio
+    ├── erd.drawio
+    ├── api.drawio
+    └── wireframe.drawio
+```
 
-ReplicationJob : file/block 모드, 상태, source/target
+## 주요 기능
 
-EventLog : 작업/에이전트 관련 이벤트(알람/로그)
+- Agent 등록/조회/수정/삭제/Heartbeat
+- 복제 Job 생성/시작/일시정지/삭제
+- Job 상태 관리 (READY → RUNNING → PAUSED/SUCCESS/FAILED)
+- 이벤트 로그 조회 (INFO/WARN/ERROR)
+- 대시보드에서 전체 현황 한눈에 보기
 
-# 라이브러리
-- git bash : .../replication-ops-console/apps/api 에서 npm install express corstjqj
+## 실행 방법
 
-node_modules: 라이브러리 실제 파일 
-package-lock.json: 설치 버전 기록 파일 
+**백엔드 서버**
+```bash
+cd apps/api
+npm install
+npm run dev
+```
 
+**프론트엔드 서버**
+```bash
+cd apps/web
+npm install
+npm run dev
+```
 
+백엔드: http://localhost:3000
+프론트엔드: http://localhost:5173
 
-# 2026.02.26
-? STEP 1 ? tsconfig.json: TypeScript 설정 파일
-? STEP 2 ? 패키지 설치
-? STEP 3 ? package.json 수정 : 라이브러리 설정 
-? STEP 4 ? 서버 실행 테스트
-? STEP 5 ? 폴더 구조 생성 
-? STEP 6 ? types/enums.ts 만들기 
-? STEP 7 ? 첫번째 Entity 만들기
-? STEP 8 ? db 연결
-? STEP 7 ? main.ts(서버시작)
-? STEP 7 ? db 연결 성공 + dev.db 생성 
+## 설계 문서
+
+| 문서 | 설명 |
+|------------------|-----------------------------------|
+| usecase.drawio   | 유스케이스 다이어그램               |
+| erd.drawio       | ERD (Entity Relationship Diagram) |
+| api.drawio       | API 설계서                         |
+| ui.drawio        | UI 화면 구조도                     |
+| wireframe.drawio | UI 와이어프레임                    |
+
+## API 엔드포인트
+
+| Method | URL | 설명 |
+|--------|-----|------|
+| GET | /api/v1/agents | Agent 목록 조회 |
+| POST | /api/v1/agents | Agent 등록 |
+| PATCH | /api/v1/agents/:id | Agent 수정 |
+| DELETE | /api/v1/agents/:id | Agent 삭제 |
+| POST | /api/v1/agents/:id/heartbeat | Heartbeat |
+| GET | /api/v1/jobs | Job 목록 조회 |
+| POST | /api/v1/jobs | Job 생성 |
+| POST | /api/v1/jobs/:id/start | Job 시작 |
+| POST | /api/v1/jobs/:id/pause | Job 일시정지 |
+| DELETE | /api/v1/jobs/:id | Job 삭제 |
+| GET | /api/v1/logs | 로그 조회 |
+| POST | /api/v1/logs | 로그 생성 |
+
+## 화면 미리보기
+
+**Dashboard**
+![Dashboard](docs/screenshots/Dashboard.png)
+
+**Agents**
+![Agents](docs/screenshots/Agents.png)
+
+**Jobs**
+![Jobs](docs/screenshots/Jobs.png)
+
+**Logs**
+![Logs](docs/screenshots/Logs.png)

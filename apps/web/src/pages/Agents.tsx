@@ -7,7 +7,7 @@ export default function Agents() {
   const [ipAddress, setIpAddress] = useState('')
   const [version, setVersion] = useState('')
 
-  // Agent ëª©ë¡ ë¶ˆëŸ¬ì˜¤ê¸°
+  // Agent ¸ñ·Ï ºÒ·¯¿À±â
   const fetchAgents = () => {
     agentApi.getAll().then(res => setAgents(res.data))
   }
@@ -16,18 +16,18 @@ export default function Agents() {
     fetchAgents()
   }, [])
 
-  // Agent ë“±ë¡
+  // Agent µî·Ï
   const handleCreate = () => {
     if (!name) return
     agentApi.create({ name, ipAddress, version }).then(() => {
       setName('')
       setIpAddress('')
       setVersion('')
-      fetchAgents() // ë“±ë¡ í›„ ëª©ë¡ ìƒˆë¡œê³ ì¹¨
+      fetchAgents() // µî·Ï ÈÄ ¸ñ·Ï »õ·Î°íÄ§
     })
   }
 
-  // Agent ì‚­ì œ
+  // Agent »èÁ¦
   const handleDelete = (id: string) => {
     agentApi.delete(id).then(() => fetchAgents())
   }
@@ -41,7 +41,7 @@ export default function Agents() {
     <div>
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Agents</h1>
 
-      {/* ë“±ë¡ í¼ */}
+      {/* µî·Ï Æû */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">Register Agent</h2>
         <div className="flex gap-4">
@@ -54,7 +54,7 @@ export default function Agents() {
         </div>
       </div>
 
-      {/* Agent ëª©ë¡ */}
+      {/* Agent ¸ñ·Ï */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">Agent List</h2>
         <table className="w-full text-sm">

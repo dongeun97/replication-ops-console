@@ -27,8 +27,11 @@ export default function Jobs() {
       })
   }
 
+  // Job »èÁ¦
   const handleDelete = (id: string) => jobApi.delete(id).then(() => fetchJobs())
+  // Job ½ÃÀÛ
   const handleStart = (id: string) => jobApi.start(id).then(() => fetchJobs())
+  // Job ÀÏ½ÃÁ¤Áö
   const handlePause = (id: string) => jobApi.pause(id).then(() => fetchJobs())
 
   const statusColor: Record<string, string> = {
@@ -43,7 +46,7 @@ export default function Jobs() {
     <div>
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Jobs</h1>
 
-      {/* ìƒì„± í¼ */}
+      {/* »ı¼º Æû */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">Create Job</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -64,7 +67,7 @@ export default function Jobs() {
         </div>
       </div>
 
-      {/* Job ëª©ë¡ */}
+      {/* Job ¸ñ·Ï */}
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">Job List</h2>
         <table className="w-full text-sm">

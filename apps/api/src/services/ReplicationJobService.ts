@@ -29,7 +29,7 @@ export class ReplicationJobService {
 
   async getById(id: string): Promise<ReplicationJob> {
     const job = await ReplicationJobRepository.findById(id)
-    if (!job) throw new Error(`Job not found: ${id}`) // 없으면 에러 → controller에서 404 처리
+    if (!job) throw new Error(`Job not found: ${id}`)
     return job
   }
 
@@ -39,11 +39,10 @@ export class ReplicationJobService {
       mode: dto.mode,
       sourcePath: dto.sourcePath,
       targetPath: dto.targetPath,
-      status: JobStatus.READY, // 처음 생성은 항상 READY
+      status: JobStatus.READY,
       rpoSeconds: dto.rpoSeconds ?? null,
     }
 
-    // agentId가 있으면 해당 Agent 찾아서 연결
     if (dto.agentId) {
       const agent = await AgentRepository.findById(dto.agentId)
       if (!agent) throw new Error(`Agent not found: ${dto.agentId}`)
@@ -54,9 +53,9 @@ export class ReplicationJobService {
   }
 
   async update(id: string, dto: UpdateJobDto): Promise<ReplicationJob> {
-    const job = await this.getById(id) // 존재 확인
+    const job = await this.getById(id)
     if (job.status === JobStatus.RUNNING) {
-      throw new Error('실행 중인 Job은 수정할 수 없습니다') // RUNNING 상태면 수정 불가
+      throw new Error('실행 중인 Job은 수정할 수 없습니다')
     }
 
     const data: Partial<ReplicationJob> = { ...dto }
@@ -73,9 +72,9 @@ export class ReplicationJobService {
   }
 
   async delete(id: string): Promise<void> {
-    const job = await this.getById(id) // 존재 확인
+    const job = await this.getById(id)
     if (job.status === JobStatus.RUNNING) {
-      throw new Error('실행 중인 Job은 삭제할 수 없습니다') // RUNNING 상태면 삭제 불가
+      throw new Error('실행 중인 Job은 삭제할 수 없습니다')
     }
     const deleted = await ReplicationJobRepository.deleteJob(id)
     if (!deleted) throw new Error(`Failed to delete job: ${id}`)
@@ -86,24 +85,58 @@ export class ReplicationJobService {
     if (job.status === JobStatus.RUNNING) {
       throw new Error('이미 실행 중인 Job입니다')
     }
-    // READY 또는 PAUSED 상태일 때만 시작 가능
+
+    // 상태를 RUNNING으로 변경
     const updated = await ReplicationJobRepository.updateJob(id, {
       status: JobStatus.RUNNING,
     })
     if (!updated) throw new Error(`Failed to start job: ${id}`)
+
+    // 실제 파일 복제 비동기 실행 (응답은 바로 반환하고 백그라운드에서 복제)
+    this.runReplication(id, job.sourcePath, job.targetPath).catch(console.error)
+
     return updated
   }
 
   async pause(id: string): Promise<ReplicationJob> {
     const job = await this.getById(id)
     if (job.status !== JobStatus.RUNNING) {
-      throw new Error('실행 중인 Job만 일시정지할 수 있습니다') // RUNNING 상태일 때만 PAUSED 가능
+      throw new Error('실행 중인 Job만 일시정지할 수 있습니다')
     }
     const updated = await ReplicationJobRepository.updateJob(id, {
       status: JobStatus.PAUSED,
     })
     if (!updated) throw new Error(`Failed to pause job: ${id}`)
     return updated
+  }
+
+  // 실제 파일 복제 로직
+  private async runReplication(id: string, sourcePath: string, targetPath: string): Promise<void> {
+    const fs = await import('fs/promises')
+    const path = await import('path')
+
+    try {
+      // targetPath 디렉토리 없으면 자동 생성
+      await fs.mkdir(path.dirname(targetPath), { recursive: true })
+
+      // 실제 파일 복제
+      await fs.copyFile(sourcePath, targetPath)
+
+      // 복제 성공 → SUCCESS
+      await ReplicationJobRepository.updateJob(id, {
+        status: JobStatus.SUCCESS,
+      })
+
+      console.log(`[복제 완료] ${sourcePath} → ${targetPath}`)
+
+    } catch (error: any) {
+      // 복제 실패 → FAILED
+      await ReplicationJobRepository.updateJob(id, {
+        status: JobStatus.FAILED,
+      })
+
+      console.error(`[복제 실패] ${error.message}`)
+    }
   }
 }
 

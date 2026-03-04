@@ -43,6 +43,7 @@ replication-ops-console/
 - Job 상태 관리 (READY → RUNNING → PAUSED/SUCCESS/FAILED)
 - 이벤트 로그 조회 (INFO/WARN/ERROR)
 - 대시보드에서 전체 현황 한눈에 보기
+- 실제 파일 복제 가능(job 시작 시 sourcePath -> targetPath 파일 복사)
 
 ## 실행 방법
 
@@ -62,6 +63,24 @@ npm run dev
 
 백엔드: http://localhost:3000
 프론트엔드: http://localhost:5173
+
+
+## 파일 복제 테스트 방법
+
+1. 테스트용 소스 파일 생성
+```powershell
+New-Item -Path "C:\temp\source" -ItemType Directory -Force
+"Hello Replication Test!" | Out-File "C:\temp\source\test.txt"
+```
+
+2. Jobs 페이지에서 Job 생성
+```
+Source Path: C:\temp\source\test.txt
+Target Path: C:\temp\target\test.txt
+```
+
+3. Start 버튼 클릭 → status가 SUCCESS로 변경되면 복제 완료
+
 
 ## 설계 문서
 
@@ -103,3 +122,14 @@ npm run dev
 
 **Logs**
 ![Logs](docs/screenshots/Logs.png)
+
+**파일 복제 과정**
+
+**1. Job 생성**
+![write](docs/screenshots/write.PNG)
+
+**2. 복제 진행 (RUNNING)**
+![process](docs/screenshots/process.PNG)
+
+**3. 복제 결과 확인**
+![result](docs/screenshots/result.PNG)
